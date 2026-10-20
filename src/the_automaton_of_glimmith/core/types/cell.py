@@ -45,6 +45,7 @@ class Palisade(IntEnum):
     Full = 5
 
 
+# TODO: Implement shape class to define a polynomio
 @dataclass
 class Polynomio():
     # uhh
