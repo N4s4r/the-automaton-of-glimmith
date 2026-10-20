@@ -1,0 +1,20 @@
+[project]
+name = "the-automaton-of-glimmith"
+version = "0.1.0"
+description = "Glimmith solver"
+readme = "README.md"
+authors = [
+    { name = "N4s4r", email = "196.nasar@gmail.com"},
+    { name = "Rafael-Bardisa", email = "rbardisa76@gmail.com" }
+]
+requires-python = ">=3.13,<3.16"
+dependencies = [
+    "matplotlib>=3.11.2",
+]
+
+[project.scripts]
+the-automaton-of-glimmith = "the_automaton_of_glimmith:main"
+
+[build-system]
+requires = ["uv_build>=0.11.21,<0.14.0"]
+build-backend = "uv_build"
