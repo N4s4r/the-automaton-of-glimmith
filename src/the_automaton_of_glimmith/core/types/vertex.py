@@ -1,9 +1,11 @@
 """
 This file defines an enum for the possible vertex states of any given vertex from glimmith (inactive, active<watchtower(x)>)
 """
+from dataclasses import dataclass
 
 from enum import IntEnum
 
+@dataclass
 class Vertex(IntEnum):
     Inactive = 0
     WTOne = 1

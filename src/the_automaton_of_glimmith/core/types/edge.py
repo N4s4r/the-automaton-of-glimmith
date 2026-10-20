@@ -1,6 +1,7 @@
 """
 This file defines an enum for the possible edge states of any given edge from glimmith (active, inactive, active<size_diff(x)>, active<ineq>...)
 """
+from dataclasses import dataclass
 
 from enum import IntFlag, IntEnum
 
