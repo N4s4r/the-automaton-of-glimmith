@@ -3,7 +3,60 @@ This file defines an enum for the possible cell states of any given cell from gl
 """
 
 from dataclasses import dataclass
+from enum import IntEnum
+
+# inactive
+# active
+# rose windows
+# area number
+# palisade
+# polynomio :(
+# compass
+
 
 @dataclass
-class Cell():
+class Inactive:
     pass
+
+
+@dataclass
+class Active:
+    pass
+
+
+@dataclass
+class Rose():
+    # in practice we only see up to 5 types but in theory there can be more
+    type: int
+
+
+@dataclass
+class Area():
+    size: int
+
+
+@dataclass
+class Palisade(IntEnum):
+    Empty = 0
+    One = 1
+    Corner = 2
+    Hallway = 3
+    End = 4
+    Full = 5
+
+
+@dataclass
+class Polynomio():
+    # uhh
+    pass
+
+
+@dataclass
+class Compass():
+    N: int
+    S: int
+    E: int
+    W: int
+
+
+Cell = Inactive | Active | Rose | Area | Palisade | Polynomio | Compass
