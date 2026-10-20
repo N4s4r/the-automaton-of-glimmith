@@ -1,35 +1,38 @@
 from pprint import pprint
 
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
+import numpy as np
+from PIL import Image
+
+from themes.catppuccin import catppuccin_mocha_rgb
 
 with open("sample/puzzle1.txt", "r") as f:
     data = [l.split() for l in f.readlines()]
 
 pprint(data)
 
-fig, ax = plt.subplots()
+r, c = len(data), len(data[0])
+
+img = np.empty((64 * (c//2) + 2, 64 * (r//2) + 2, 3), dtype=np.uint8)
+
+fill_color = catppuccin_mocha_rgb["Crust"]
+out_color = catppuccin_mocha_rgb["Overlay 0"]
+edge_color = catppuccin_mocha_rgb["Yellow"]
+default_edge_color = catppuccin_mocha_rgb["Base"]
+
+edges_with_color = []
 
 for row, row_data in enumerate(data):
     for col, cell_data in enumerate(row_data):
-        x, y = col // 2, row // 2
-
-        fill_color = "#11111b"
-        out_color = "#313244"
-        edge_color = "#f9e2af"
-        edge_color = "#ff0000"
-        default_edge_color = "#181825"
+        x, y = 64 * (col//2) + 1, 64 * (row//2) + 1
 
         # Cell
         if row % 2 and col % 2:
             color = fill_color
-            plt.plot(x, y)
 
             if cell_data.startswith("c"):
                 color = out_color
 
-            square = Rectangle((x, y), 1, 1, fill=True, color=color)
-            ax.add_patch(square)
+            img[y+1:y+63, x+1:x+63] = color
         
         # Horizontal edge
         if not row % 2 and col % 2:
@@ -49,7 +52,10 @@ for row, row_data in enumerate(data):
             else:
                 if data[row-1][col][0] != data[row+1][col][0]:
                     color = edge_color
-            plt.plot([x, x+1], [y, y], color=color)
+            if color == edge_color:
+                edges_with_color.append((y-1, x-1, y+1, x+65))
+            else:
+                img[y-1:y+1, x-1:x+65] = color
         
         # Vertical edge
         if row % 2 and not col % 2:
@@ -69,8 +75,12 @@ for row, row_data in enumerate(data):
             else:
                 if data[row][col-1][0] != data[row][col+1][0]:
                     color = edge_color
-            plt.plot([x, x], [y, y+1], color=color)
+            if color == edge_color:
+                edges_with_color.append((y-1, x-1, y+65, x+1))
+            else:
+                img[y-1:y+65, x-1:x+1] = color
 
-ax.invert_yaxis()
-plt.savefig("img/map.png", dpi=150, bbox_inches="tight")
-plt.close()
+for y1, x1, y2, x2 in edges_with_color:
+    img[y1:y2, x1:x2] = edge_color
+
+Image.fromarray(img).save("img/map.png")
