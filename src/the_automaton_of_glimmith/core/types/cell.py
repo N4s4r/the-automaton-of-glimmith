@@ -53,10 +53,10 @@ class Polynomio():
 
 @dataclass
 class Compass():
-    N: int
-    S: int
-    E: int
-    W: int
+    N: int | None
+    S: int | None
+    E: int | None
+    W: int | None
 
 
 Cell = Inactive | Active | Rose | Area | Palisade | Polynomio | Compass
