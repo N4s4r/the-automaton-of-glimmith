@@ -1,14 +1,12 @@
-from pprint import pprint
+from pathlib import Path
 
 import numpy as np
 from PIL import Image
 
 from themes.catppuccin import catppuccin_mocha_rgb
 
-with open("sample/puzzle1.txt", "r") as f:
+with open("data/levels/puzzle1.txt", "r") as f:
     data = [l.split() for l in f.readlines()]
-
-pprint(data)
 
 r, c = len(data), len(data[0])
 
@@ -83,4 +81,8 @@ for row, row_data in enumerate(data):
 for y1, x1, y2, x2 in edges_with_color:
     img[y1:y2, x1:x2] = edge_color
 
-Image.fromarray(img).save("img/map.png")
+
+output_path = Path("output/map.png")
+output_path.parent.mkdir(parents=True, exist_ok=True)
+
+Image.fromarray(img).save(output_path)
