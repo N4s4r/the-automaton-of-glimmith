@@ -1,20 +1,18 @@
 from .cell import Cell
 from .edge import Edge
-from .vertex import Vertex
 from .rules import Rules
 from .shape import Shape
-
-from typing import List
+from .vertex import Vertex
 
 MatrixDataType = Cell | Edge | Vertex
 
 
-class GlimmithMap():
+class GlimmithMap:
 
-    map: List[List[MatrixDataType]]
+    map: list[list[MatrixDataType]]
 
     global_rules: Rules
 
-    shapes: List[Shape] | None
+    shapes: list[Shape] | None
 
     pass

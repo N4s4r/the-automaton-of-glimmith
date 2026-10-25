@@ -1,7 +1,7 @@
-from ..interfaces.maploader import MapLoader
-
-from ...core.types import GlimmithMap
 from pathlib import Path
+
+from ...core.types.map import GlimmithMap
+from ..interfaces.maploader import MapLoader
 
 """
 Load a glimmith map stored in txt
@@ -9,5 +9,5 @@ Load a glimmith map stored in txt
 class TxtLoader(MapLoader):
 
     # we should formalize map format somewhere, somehow
-    def load(path: str | Path) -> GlimmithMap:
+    def load(self, path: str | Path) -> GlimmithMap:
         pass

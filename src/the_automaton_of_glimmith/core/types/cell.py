@@ -25,17 +25,16 @@ class Active:
 
 
 @dataclass
-class Rose():
+class Rose:
     # in practice we only see up to 5 types but in theory there can be more
     type: int
 
 
 @dataclass
-class Area():
+class Area:
     size: int
 
 
-@dataclass
 class Palisade(IntEnum):
     Empty = 0
     One = 1
@@ -47,13 +46,13 @@ class Palisade(IntEnum):
 
 # TODO: Implement shape class to define a polynomio
 @dataclass
-class Polynomio():
+class Polynomio:
     # uhh
     pass
 
 
 @dataclass
-class Compass():
+class Compass:
     N: int | None
     S: int | None
     E: int | None
